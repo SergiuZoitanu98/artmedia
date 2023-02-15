@@ -15,3 +15,4 @@ return customFetch(url,{
     body:JSON.stringify(ata)
 })
 }
+export const BACKEND_URL='http://localhost:5000'

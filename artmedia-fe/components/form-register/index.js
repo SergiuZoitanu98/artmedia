@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
+import { BACKEND_URL } from "@/utils/utils";
+
 import nookies from "nookies";
 
 const Register = () => {
@@ -9,6 +11,7 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const cookies = nookies.get('jwt')
+  
     if(cookies.jwt){
         router.push('/home')
     }
@@ -19,7 +22,7 @@ const Register = () => {
       email: email,
       password: password,
     };
-    fetch("http://localhost:5000/users/register", {
+    fetch(`${BACKEND_URL}/users/register`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -28,10 +31,10 @@ const Register = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        router.push('/')
       })
       .catch((error) => {
         console.error("Error:", error);
+        alert("error")
       });
   };
   const goToLogin = ()=>router.push('/')

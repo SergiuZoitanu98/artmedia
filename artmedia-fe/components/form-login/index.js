@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
 import { setCookie } from "nookies";
+import { BACKEND_URL } from "@/utils/utils";
 import nookies from 'nookies'
 const Form = () => {
   const router = useRouter();
@@ -15,7 +16,7 @@ const Form = () => {
       email: email,
       password: password,
     };
-    fetch("http://localhost:5000/users/login", {
+    fetch(`${BACKEND_URL}/users/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
