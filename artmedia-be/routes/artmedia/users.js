@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const User = require("../../models/user");
 const jwt = require('jsonwebtoken')
+
 require('dotenv').config()
 
 router.post("/register", async (req, res) => {
@@ -19,10 +20,10 @@ router.post("/login", async (req, res) => {
   try {
     const user = await User.findOne({ email });
     if (!user) {
-      res.status(404).json({ message: "User not found" });
+     return res.json({ message: "Bad credentials" });
     }
     if (user.password !== password) {
-      res.json({ message: "Incorrect password" });
+   return   res.json({ message: "Incorrect password" });
     }
     const token = jwt.sign({email:user.email},process.env.SECRET)
     res.send({token})
