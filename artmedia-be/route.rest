@@ -1,0 +1,36 @@
+GET http://localhost:5000/posts
+
+###
+
+GET http://localhost:5000/posts/getPost/63ec988e96aeb8f9c2b338e4
+
+###
+
+POST http://localhost:5000/posts/createPost
+Content-Type: application/json
+
+{
+    "title":"Test",
+    "description":"test"
+}
+
+###
+DELETE http://localhost:5000/posts/deletePost/63ec959d2867c8a085ce6406
+
+###
+PATCH http://localhost:5000/posts/updatePost/63ec988e96aeb8f9c2b338e4
+Content-Type: application/json
+
+{
+    "title":"Ciao",
+    "description":"test"
+}
+
+###
+POST http://localhost:5000/users/login
+Content-Type: application/json
+
+{
+    "email":"szoitanu98@gmail.com",
+    "password":"test123"
+}
