@@ -12,8 +12,7 @@ router.post('/register', async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 10);
     const newUser = new User({ name,surname, email, password: hashedPassword });
     await newUser.save();
-    const token = jwt.sign({ email: newUser.email, name: newUser.name }, process.env.SECRET);
-    res.status(201).json({ token });
+    res.status(201).json({ message:"user created" });
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
@@ -23,7 +22,7 @@ router.post('/login', async (req, res) => {
   try {
     const user = await User.findOne({ email });
     if (!user) {
-      return res.status(401).json({ message: 'Bad credentials' });
+      return res.status(400).json({ message: 'Bad credentials' });
     }
     const passwordMatch = await bcrypt.compare(password, user.password);
     if (!passwordMatch) {
