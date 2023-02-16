@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { setCookie } from "nookies";
 import { toast } from "react-toastify";
 import { divAlignItemsClass, divFormClass } from "./style";
@@ -17,12 +17,14 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate()
-  const { jwt } = parseCookies();
+  useEffect(()=>{
+    const { jwt } = parseCookies();
     if (jwt) {
-      return <Navigate to="/dashboard" replace />
+       <Navigate to="/dashboard" replace />
   }
+  },[])
+  
   const login = () => {
-    
     apiFetch(METHODS.post, USER_ENDPOINTS.login, { email, password })
       .then((data) => {
         setCookie(null, "jwt", data.token, {
@@ -40,6 +42,7 @@ const Login = () => {
       <div className={divAlignItemsClass}>
         <div className={divFormClass}>
           <Input
+          culo="culo"
             label="Email"
             type="text"
             name="Email"

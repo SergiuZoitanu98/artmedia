@@ -1,10 +1,10 @@
 import { Outlet,Navigate } from "react-router-dom";
 import { parseCookies } from 'nookies';
-const PrivateRoutes = ()=>{
+const PrivateRoute = ()=>{
  const { jwt } = parseCookies()
 
  return(
-    !jwt?<Navigate to="/"/>:<Outlet/>
+    jwt?<Navigate to="/dashboard"/>:<Outlet/>
  )
 }
-export default PrivateRoutes
+export default PrivateRoute

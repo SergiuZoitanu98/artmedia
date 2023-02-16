@@ -9,7 +9,7 @@ const Anchor = ({ to, target, rel,label }) => {
   };
 
   return (
-    <a href={to} target={target} rel={rel} onClick={navigateTo}>
+    <a target={target} rel={rel} onClick={navigateTo}>
       {label}
     </a>
   );
