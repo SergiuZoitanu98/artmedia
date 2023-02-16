@@ -14,12 +14,12 @@ function App() {
       <Routes>
         <Route element={<PrivateRoutes />}>
           <Route path="/dashboard" element={<Dashboard />} exact />
-          <Route path="/test" element={<Test/>}/>
           <Route path="*" element={<NotFound />} />
         </Route>
         <Route element={<PrivateRoute/>}>
         <Route path="/" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        {/* <Route path="/test" element={<Test />} /> */}
         </Route>
       </Routes>
       <ToastContainer />
@@ -28,3 +28,6 @@ function App() {
 }
 
 export default App;
+
+
+
