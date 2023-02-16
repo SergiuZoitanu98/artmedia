@@ -6,12 +6,17 @@ import Anchor from "../../components/anchor";
 import apiFetch from "../../utils/customFetch";
 import { toast } from "react-toastify";
 import { METHODS,USER_ENDPOINTS } from "../../utils/costants";
-
+import { parseCookies } from 'nookies';
+import { Navigate } from "react-router-dom";
 const Register = () => {
   const [name, setName] = useState("");
   const [surname, setSurname] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { jwt } = parseCookies();
+    if (jwt) {
+      return <Navigate to="/dashboard" replace />
+  }
   const register = () => {
     apiFetch(METHODS.post, USER_ENDPOINTS.register, { name, surname, email, password })
       .then((data) => {

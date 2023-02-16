@@ -2,24 +2,34 @@ import { useState } from "react";
 import { setCookie } from "nookies";
 import { toast } from "react-toastify";
 import { divAlignItemsClass, divFormClass } from "./style";
+import { useNavigate } from 'react-router-dom';
+import { METHODS,USER_ENDPOINTS } from "../../utils/costants";
 import "react-toastify/dist/ReactToastify.css";
 import Input from "../../components/input";
 import Button from "../../components/button";
 import apiFetch from "../../utils/customFetch";
 import Anchor from "../../components/anchor";
-import { METHODS,USER_ENDPOINTS } from "../../utils/costants";
+import { parseCookies } from 'nookies';
+import { Navigate } from "react-router-dom";
+
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate()
+  const { jwt } = parseCookies();
+    if (jwt) {
+      return <Navigate to="/dashboard" replace />
+  }
   const login = () => {
+    
     apiFetch(METHODS.post, USER_ENDPOINTS.login, { email, password })
       .then((data) => {
         setCookie(null, "jwt", data.token, {
           maxAge: 30 * 24 * 60 * 60,
           path: "/",
         });
-        toast("logged!");
+        navigate('/dashboard')
       })
       .catch((error) => {
         toast.error("Bad credentials");
